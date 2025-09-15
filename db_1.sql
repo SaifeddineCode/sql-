@@ -275,4 +275,12 @@ SELECT *
 FROM employee_demographics;
 
 
+-- my exemple of subqueries : 
+SELECT first_name,last_name,age,
+(SELECT avg(age) 
+FROM employee_demographics) as avg_age
+FROM employee_demographics
+GROUP BY first_name,last_name,age
+
+
 
