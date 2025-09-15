@@ -284,3 +284,24 @@ GROUP BY first_name,last_name,age
 
 
 
+-- Window functions : 
+
+#Difference vs GROUP BY
+#GROUP BY: returns one row per group.
+#Window function (OVER): returns all rows, but adds aggregated info for each group.
+
+SELECT gender , AVG (salary)
+FROM employee_demographics as dm
+JOIN employee_salary 	as sal
+	ON dm.employee_id = sal.employee_id
+GROUP BY gender    
+;
+
+
+SELECT dm.first_name,dm.last_name,gender,salary,
+SUM(salary) over(PARTITION BY gender ORDER BY dm.employee_id)
+FROM employee_demographics as dm
+JOIN employee_salary as sal
+	ON dm.employee_id = sal.employee_id
+
+;
