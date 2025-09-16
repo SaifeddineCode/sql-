@@ -350,3 +350,43 @@ WHERE salary >= 50000 ;
 
 SELECT *
 FROM salary_over_50k
+
+
+-- Stored procedures :
+# A stored procedure is like a saved program in the database that contains one or more SQL statements.
+# You can call (execute) it whenever you want, instead of writing the same SQL code again and again. 
+CREATE PROCEDURE large_salaries()
+SELECT * 
+FROM employee_salary
+WHERE salary >= 50000;
+
+CALL large_salaries();
+
+DELIMITER $$
+CREATE PROCEDURE large_salaries2()
+BEGIN
+	SELECT * 
+	FROM employee_salary
+	WHERE salary >= 50000;
+	SELECT * 
+	FROM employee_salary
+	WHERE salary >= 10000;
+END $$
+DELIMITER ;
+
+CALL large_salaries2()
+
+
+
+-- Parameters : 
+
+DELIMITER $$
+CREATE PROCEDURE large_salaries3(eID INT)
+BEGIN
+	SELECT salary
+	FROM employee_salary
+    WHERE employee_id = eID;
+END $$
+DELIMITER ;
+
+CALL large_salaries3(1)
