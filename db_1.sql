@@ -305,3 +305,20 @@ JOIN employee_salary as sal
 	ON dm.employee_id = sal.employee_id
 
 ;
+
+
+-- CTE = common table expression : 
+#A CTE is like a temporary named result set (a virtual table) that you create with WITH ... AS (...).
+#You can then use it just like a table in your main query.
+
+
+WITH CTE_EXEMPLE as (
+SELECT gender,AVG(salary) as avg_salary, MAX(salary) as max_salary,MIN(salary) as min_salary,COUNT(salary) as count_salary
+FROM employee_demographics as dm
+JOIN employee_salary as sal
+	ON dm.employee_id = sal.employee_id
+GROUP BY gender
+)
+SELECT avg(avg_salary)
+FROM CTE_EXEMPLE
+;
