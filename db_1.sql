@@ -322,3 +322,31 @@ GROUP BY gender
 SELECT avg(avg_salary)
 FROM CTE_EXEMPLE
 ;
+-- Temporary table : is a table that you create and use only for the current session or query — it’s like a scratchpad where you can store intermediate results.
+
+
+CREATE TEMPORARY TABLE temp_table (
+first_name varchar(50),
+last_name varchar (50),
+favorite_movie varchar(100)
+ );
+ 
+INSERT INTO temp_table
+VALUES('saif','hassouni','cukur');
+ 
+SELECT *
+FROM temp_table;
+
+
+# real example of temporary table : 
+
+SELECT * 
+FROM employee_salary ; 
+
+CREATE TEMPORARY TABLE salary_over_50k
+SELECT * 
+FROM employee_salary
+WHERE salary >= 50000 ;
+
+SELECT *
+FROM salary_over_50k
